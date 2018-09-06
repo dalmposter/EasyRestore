@@ -1,0 +1,51 @@
+2018-09-06 14:19:05,143 INFO  [main] c.a.b.i.b.client.spring.SpringMain Initializing
+2018-09-06 14:19:07,627 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Unpacking bitbucket-20180905-102803-342.tar to C:\Atlassian\ApplicationData\Bitbucket(restored)
+2018-09-06 14:19:08,580 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Validating database before restore
+2018-09-06 14:19:09,612 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Restoring database schema definition
+2018-09-06 14:19:22,348 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Restoring database data
+2018-09-06 14:19:22,489 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 1 of 42, containing 1 change
+2018-09-06 14:19:22,504 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 2 of 42, containing 1 change
+2018-09-06 14:19:22,520 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 3 of 42, containing 1 change
+2018-09-06 14:19:22,520 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 4 of 42, containing 9 changes
+2018-09-06 14:19:22,551 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 5 of 42, containing 1 change
+2018-09-06 14:19:22,551 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 6 of 42, containing 1 change
+2018-09-06 14:19:22,567 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 7 of 42, containing 1 change
+2018-09-06 14:19:22,567 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 8 of 42, containing 12 changes
+2018-09-06 14:19:22,598 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 9 of 42, containing 2 changes
+2018-09-06 14:19:22,614 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 10 of 42, containing 1 change
+2018-09-06 14:19:22,614 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 11 of 42, containing 12 changes
+2018-09-06 14:19:22,629 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 12 of 42, containing 3 changes
+2018-09-06 14:19:22,645 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 13 of 42, containing 7 changes
+2018-09-06 14:19:22,676 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 14 of 42, containing 5 changes
+2018-09-06 14:19:22,692 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 15 of 42, containing 13 changes
+2018-09-06 14:19:22,723 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 16 of 42, containing 5 changes
+2018-09-06 14:19:22,740 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 17 of 42, containing 5 changes
+2018-09-06 14:19:22,754 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 18 of 42, containing 5 changes
+2018-09-06 14:19:22,754 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 19 of 42, containing 5 changes
+2018-09-06 14:19:22,770 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 20 of 42, containing 3 changes
+2018-09-06 14:19:22,770 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 21 of 42, containing 2 changes
+2018-09-06 14:19:22,786 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 22 of 42, containing 1 change
+2018-09-06 14:19:22,786 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 23 of 42, containing 2 changes
+2018-09-06 14:19:22,786 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 24 of 42, containing 10 changes
+2018-09-06 14:19:22,801 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 25 of 42, containing 6 changes
+2018-09-06 14:19:22,817 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 26 of 42, containing 3 changes
+2018-09-06 14:19:22,817 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 27 of 42, containing 1 change
+2018-09-06 14:19:22,833 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 28 of 42, containing 4 changes
+2018-09-06 14:19:22,848 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 29 of 42, containing 1 change
+2018-09-06 14:19:22,848 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 30 of 42, containing 9 changes
+2018-09-06 14:19:22,864 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 31 of 42, containing 45 changes
+2018-09-06 14:19:22,895 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 32 of 42, containing 111 changes
+2018-09-06 14:19:23,005 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 33 of 42, containing 111 changes
+2018-09-06 14:19:23,098 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 34 of 42, containing 2 changes
+2018-09-06 14:19:23,114 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 35 of 42, containing 2 changes
+2018-09-06 14:19:23,114 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 36 of 42, containing 2 changes
+2018-09-06 14:19:23,114 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 37 of 42, containing 3 changes
+2018-09-06 14:19:23,130 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 38 of 42, containing 2 changes
+2018-09-06 14:19:23,130 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 39 of 42, containing 2 changes
+2018-09-06 14:19:23,145 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 40 of 42, containing 2 changes
+2018-09-06 14:19:23,145 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 41 of 42, containing 4 changes
+2018-09-06 14:19:23,145 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Processing dataset 42 of 42, containing 24 changes
+2018-09-06 14:19:23,208 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Restoring ActiveObjects data
+2018-09-06 14:19:23,458 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Restoring ActiveObjects table definitions
+2018-09-06 14:19:24,337 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Restoring ActiveObjects table data
+2018-09-06 14:19:24,884 INFO  [main] c.a.b.i.b.c.DefaultRestoreClient Cleaning up

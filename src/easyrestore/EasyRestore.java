@@ -5,8 +5,17 @@
  */
 package easyrestore;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,10 +32,14 @@ public class EasyRestore {
     private static String restoreDir = "C:\\Atlassian\\ApplicationData\\Bitbucket(restored)";
     private static String backupDir = "C:\\Atlassian\\Backups\\backups\\bitbucket-20180905-102803-342.tar";
     
+    private static String restoreClientDir = "C:\\Atlassian\\bitbucket-backup-client-3.3.4\\bitbucket-restore-client.jar";
+    
     private static String dbIP = "localhost:5432";
     private static String dbName = "bitbucket";
     private static String dbAccount = "bitbucketuser";
     private static String dbPassword = "CH4NG3M3";
+    private static String dbRoot = "postgres";
+    private static String dbRootPw = "Emp1r32202";
     
     private static Connection connect = null;
     private static PreparedStatement preparedStatement = null;
@@ -42,36 +55,63 @@ public class EasyRestore {
         else System.out.println("Failure");
     }
     
+    public static void sleep(int ms)
+    {
+        try
+        {
+            Thread.sleep(ms);
+        }
+        catch(Exception e)
+        {
+
+        }
+    }
+    
     public static boolean execute()
     {
         //stop and remove services
-//        try
-//        {
-//            Runtime.getRuntime().exec("cmd /c start \"\" C:\\Users\\dominic.cousins\\Documents\\NetBeansProjects\\EasyRestore\\removeServices.bat");
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println("Error running bat: " + e);
-//            e.printStackTrace();
-//            return false;
-//        }
+        try
+        {
+            Runtime.getRuntime().exec("cmd /C start /wait sc stop atlassianbitbucket");
+            Runtime.getRuntime().exec("cmd /C start /wait sc stop atlassianbitbucketelasticsearch");
+            System.out.println("Stopped services");
+            
+            sleep(1000);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error stopping services: " + e);
+            e.printStackTrace();
+            return false;
+        }
         
         if(startConnect())
         {
             try
             {
                 preparedStatement = connect.prepareStatement("DROP DATABASE bitbucket");
+                //preparedStatement.setString(1, dbName);
+                System.out.println("Executing: " + preparedStatement);
                 preparedStatement.executeUpdate();
-                preparedStatement = connect.prepareStatement("CREATE DATABASE bitbucket "
-                    + "WITH OWNER = bitbucketuser ENCODING = 'UTF8' "
-                    + "TABLESPACE = pg_default"
-                    + "LC_COLLATE = 'English_United Kingdom.1252'"
-                    + "LC_CTYPE = 'English_United Kingdom.1252'"
-                    + "CONNECTION LIMIT = -1;");
                 
-                preparedStatement = connect.prepareStatement("DROP ROLE bitbucketuser");
+                sleep(1000);
+            }
+            catch (Exception e)
+            {
+                System.out.println("Couldnt drop database: " + e);
+                e.printStackTrace();
+            }
+            
+            try
+            {
+                preparedStatement = connect.prepareStatement("CREATE DATABASE " + dbName + " "
+                    + "WITH OWNER = " + dbAccount);
+                System.out.println("Executing: " + preparedStatement);
                 preparedStatement.executeUpdate();
-                preparedStatement = connect.prepareStatement("SELECT 1 FROM pg_roles WHERE rolname = 'jirauser'");
+                
+                preparedStatement = connect.prepareStatement("SELECT 1 FROM pg_roles WHERE rolname = ?");
+                preparedStatement.setString(1, dbAccount);
+                System.out.println("Executing: " + preparedStatement);
                 resultSet = preparedStatement.executeQuery();
                 
                 boolean userExists = false;
@@ -80,6 +120,7 @@ public class EasyRestore {
                 {
                     if(resultSet.getInt(1) == 1)
                     {
+                        System.out.println("Found the user. Not creaing");
                         userExists = true;
                         break;
                     }
@@ -87,18 +128,178 @@ public class EasyRestore {
                 
                 if(!userExists)
                 {
-                    
+                    System.out.println("Did not find user. Creating");
+                    preparedStatement = connect.prepareStatement("CREATE USER ? WITH PASSWORD '?' CREATEDB CREATEROLE");
+                    preparedStatement.setString(1, dbAccount);
+                    preparedStatement.setString(2, dbPassword);
+                    System.out.println("Executing: " + preparedStatement);
+                    preparedStatement.executeUpdate();
                 }
             }
             catch (Exception e)
             {
-                System.out.println("Error dropping/recreating datbase: " + e);
+                System.out.println("Error recreating datbase: " + e);
                 e.printStackTrace();
                 return false;
             }
+            finally
+            {
+                close();
+            }
+            
+            sleep(1000);
+            
+            try
+            {
+                System.out.println("Deleting restore directory");
+                deleteDirectoryRecursion(Paths.get(restoreDir));
+            }
+            catch (java.nio.file.NoSuchFileException e)
+            {
+                System.out.println("Restore directory already deleted, continuing...");
+            }
+            catch (Exception e)
+            {
+                System.out.println("Error deleting restore directory: " + e);
+                e.printStackTrace();
+            }
+            
+            sleep(1000);
+            
+            try
+            {
+                System.out.println("Running restore client");
+                Process restoreClient = Runtime.getRuntime().exec("cmd /C start /wait java -ja            \n" +
+"                BufferedReader stdInput = new BufferedReader(new \n" +
+"                InputStreamReader(restoreClient.getInputStream()));\n" +
+"\n" +
+"                BufferedReader stdError = new BufferedReader(new \n" +
+"                InputStreamReader(restoreClient.getErrorStream()));r -noverify -Dbitbucket.home=" + restoreDir + " " + restoreClientDir + " " + backupDir);
+
+
+                sleep(1000);
+            }
+            catch (Exception e)
+            {
+                System.out.println("Couldn't run restore client. Stopping...");
+            }
+            
+            sleep(10000);
+            
+            try
+            {
+                System.out.println("Deleting contents of home directory");
+                deleteContents(Paths.get(homeDir));
+            }
+            catch (Exception e)
+            {
+                System.out.println("Couldn't delete contents of home directory. Stopping: " + e);
+                e.printStackTrace();
+            }
+            
+            sleep(2000);
+            
+            System.out.println("Copying restored home directory");
+            copyDirectoryContentsOnly(new File(restoreDir), new File(homeDir));
+            
+            sleep(5000);
+            System.out.println("Starting Bitbucket...");
+            try
+            {
+                Runtime.getRuntime().exec("cmd /C start /wait sc stop atlassianbitbucket");
+            }
+            catch (Exception e)
+            {
+                System.out.println("Couldn't start service : " + e);
+                System.out.println("Restore may have been successful anyway");
+            }
+        }
+        else
+        {
+            System.out.println("Couldn't establish connection with database. Stopping...");
         }
         
         return true;
+    }
+    
+    public static void copyDirectoryContentsOnly(File source, File destination)
+    {
+        if(source.isDirectory() && source.listFiles() != null){
+            for(File file : source.listFiles()) {               
+                copyDirectoryContents(file, destination);
+            }
+        }
+    }
+    
+    public static void copyDirectoryContents(File source, File destination){
+        try {
+            String destinationPathString = destination.getPath() + "\\" + source.getName();
+            Path destinationPath = Paths.get(destinationPathString);
+            Files.copy(source.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
+        }        
+        catch (UnsupportedOperationException e) {
+            //UnsupportedOperationException
+        }
+        catch (DirectoryNotEmptyException e) {
+            //DirectoryNotEmptyException
+        }
+        catch (IOException e) {
+            //IOException
+        }
+        catch (SecurityException e) {
+            //SecurityException
+        }
+
+        if(source.isDirectory() && source.listFiles() != null){
+            for(File file : source.listFiles()) {               
+                copyDirectoryContents(file, new File(destination.getPath() + "\\" + source.getName()));
+            }
+        }
+
+    }
+    
+    public static void deleteContents(Path path) throws IOException
+    {
+        if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS))
+        {
+            try (DirectoryStream<Path> entries = Files.newDirectoryStream(path))
+            {
+                for (Path entry : entries)
+                {
+                    deleteDirectoryRecursion(entry);
+                }
+            }
+        }
+    }
+    
+    public static void deleteDirectoryRecursion(Path path) throws IOException
+    {
+        if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS))
+        {
+            try (DirectoryStream<Path> entries = Files.newDirectoryStream(path))
+            {
+                for (Path entry : entries)
+                {
+                    deleteDirectoryRecursion(entry);
+                }
+            }
+        }
+        Files.delete(path);
+    }
+    
+    public static void close()
+    {
+        try
+        {
+            if(preparedStatement != null) preparedStatement.close();
+            if(resultSet != null) resultSet.close();
+            if(connect != null) connect.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error closing connection: " + e);
+            e.printStackTrace();
+        }
     }
     
     public static boolean startConnect()
@@ -106,7 +307,7 @@ public class EasyRestore {
         try
         {
             Class.forName("org.postgresql.Driver");
-            connect = DriverManager.getConnection("jdbc:postgresql://localhost/postgres", dbAccount, dbPassword);
+            connect = DriverManager.getConnection("jdbc:postgresql://localhost/postgres", dbRoot, dbRootPw);
         }
         catch(Exception e)
         {
