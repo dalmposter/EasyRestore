@@ -5,10 +5,8 @@
  */
 package easyrestore;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -27,6 +25,8 @@ import java.sql.ResultSet;
  */
 public class EasyRestore {
 
+    private static MainGUI gui;
+    
     private static String installDir = "C:\\Atlassian\\Bitbucket\\5.13.1";
     private static String homeDir = "C:\\Atlassian\\ApplicationData\\Bitbucket";
     private static String restoreDir = "C:\\Atlassian\\ApplicationData\\Bitbucket(restored)";
@@ -38,8 +38,6 @@ public class EasyRestore {
     private static String dbName = "bitbucket";
     private static String dbAccount = "bitbucketuser";
     private static String dbPassword = "CH4NG3M3";
-    private static String dbRoot = "postgres";
-    private static String dbRootPw = "Emp1r32202";
     
     private static Connection connect = null;
     private static PreparedStatement preparedStatement = null;
@@ -51,8 +49,35 @@ public class EasyRestore {
     
     public static void main(String[] args)
     {
-        if(execute()) System.out.println("Success");
-        else System.out.println("Failure");
+        gui = new MainGUI();
+        gui.setVisible(true);
+    }
+    
+    private static boolean getVariables()
+    {
+        installDir = gui.getInstallDir();
+        if(installDir == null || "".equals(installDir)) return false;
+        
+        homeDir = gui.getHomeDir();
+        if(homeDir == null || "".equals(homeDir)) return false;
+        restoreDir = (new File(homeDir)).getParentFile().getName() + "\\Bitbucket(restored)";
+        
+        backupDir = gui.getBackupDir();
+        if(backupDir == null || "".equals(backupDir)) return false;
+        
+        dbIP = gui.getDbIp();
+        if(dbIP == null || "".equals(dbIP)) return false;
+        
+        dbName = gui.getDbName();
+        if(dbName == null || "".equals(dbName)) return false;
+        
+        dbAccount = gui.getDbAccount();
+        if(dbAccount == null) return false;
+        
+        dbPassword = gui.getDbPw();
+        if(dbPassword == null) return false;
+        
+        return true;
     }
     
     public static void sleep(int ms)
@@ -69,7 +94,10 @@ public class EasyRestore {
     
     public static boolean execute()
     {
+        if(getVariables()) System.out.println("Success");
+        else System.out.println("Failure");
         //stop and remove services
+        /*
         try
         {
             Runtime.getRuntime().exec("cmd /C start /wait sc stop atlassianbitbucket");
@@ -109,32 +137,32 @@ public class EasyRestore {
                 System.out.println("Executing: " + preparedStatement);
                 preparedStatement.executeUpdate();
                 
-                preparedStatement = connect.prepareStatement("SELECT 1 FROM pg_roles WHERE rolname = ?");
-                preparedStatement.setString(1, dbAccount);
-                System.out.println("Executing: " + preparedStatement);
-                resultSet = preparedStatement.executeQuery();
-                
-                boolean userExists = false;
-                
-                while(resultSet.next())
-                {
-                    if(resultSet.getInt(1) == 1)
-                    {
-                        System.out.println("Found the user. Not creaing");
-                        userExists = true;
-                        break;
-                    }
-                }
-                
-                if(!userExists)
-                {
-                    System.out.println("Did not find user. Creating");
-                    preparedStatement = connect.prepareStatement("CREATE USER ? WITH PASSWORD '?' CREATEDB CREATEROLE");
-                    preparedStatement.setString(1, dbAccount);
-                    preparedStatement.setString(2, dbPassword);
-                    System.out.println("Executing: " + preparedStatement);
-                    preparedStatement.executeUpdate();
-                }
+//                preparedStatement = connect.prepareStatement("SELECT 1 FROM pg_roles WHERE rolname = ?");
+//                preparedStatement.setString(1, dbAccount);
+//                System.out.println("Executing: " + preparedStatement);
+//                resultSet = preparedStatement.executeQuery();
+//                
+//                boolean userExists = false;
+//                
+//                while(resultSet.next())
+//                {
+//                    if(resultSet.getInt(1) == 1)
+//                    {
+//                        System.out.println("Found the user. Not creaing");
+//                        userExists = true;
+//                        break;
+//                    }
+//                }
+//                
+//                if(!userExists)
+//                {
+//                    System.out.println("Did not find user. Creating");
+//                    preparedStatement = connect.prepareStatement("CREATE USER ? WITH PASSWORD '?' CREATEDB CREATEROLE");
+//                    preparedStatement.setString(1, dbAccount);
+//                    preparedStatement.setString(2, dbPassword);
+//                    System.out.println("Executing: " + preparedStatement);
+//                    preparedStatement.executeUpdate();
+//                }
             }
             catch (Exception e)
             {
@@ -218,7 +246,7 @@ public class EasyRestore {
         {
             System.out.println("Couldn't establish connection with database. Stopping...");
         }
-        
+        */
         return true;
     }
     
@@ -307,7 +335,7 @@ public class EasyRestore {
         try
         {
             Class.forName("org.postgresql.Driver");
-            connect = DriverManager.getConnection("jdbc:postgresql://localhost/postgres", dbRoot, dbRootPw);
+            connect = DriverManager.getConnection("jdbc:postgresql://localhost/postgres", dbAccount, dbPassword);
         }
         catch(Exception e)
         {

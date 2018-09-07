@@ -1,4 +1,0 @@
-sc stop atlassianbitbucket
-sc stop atlassianbitbucketelasticsearch
-sc delete atlassianbitbucket
-sc delete atlassianbitbucketelasticsearch
