@@ -74,7 +74,7 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
             progressBar.setValue(addProgress);
             progressBar.setStringPainted(true);
             
-            progressBarBackup.setValue(addProgress);
+            progressBarBackup.setValue(addBackupProgress);
             progressBarBackup.setStringPainted(true);
             try
             {
@@ -110,13 +110,13 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         textBackupHomeDir = new javax.swing.JTextField();
-        browseInstallDir1 = new javax.swing.JButton();
+        browseBackupHomeDir = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         textBackupBackupDir = new javax.swing.JTextField();
-        browseInstallDir2 = new javax.swing.JButton();
+        browseBackupBackupDir = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         textBackupClientDir = new javax.swing.JTextField();
-        browseClientDir1 = new javax.swing.JButton();
+        browseBackupClientDir = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         textAdminName = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -125,13 +125,13 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
         passwordAdminPw = new javax.swing.JPasswordField();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
-        progressBarBackup = new javax.swing.JProgressBar();
-        labelProgress1 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         logAreaBackup = new javax.swing.JTextArea();
         buttonQuit1 = new javax.swing.JButton();
         buttonBackup = new javax.swing.JButton();
+        labelProgress2 = new javax.swing.JLabel();
+        progressBarBackup = new javax.swing.JProgressBar();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -185,23 +185,23 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
 
         jLabel8.setText("Bitbucket Home Directory:");
 
-        textBackupHomeDir.setText("C:\\Atlassian\\Bitbucket\\5.13.1");
+        textBackupHomeDir.setText("C:\\Atlassian\\ApplicationData\\Bitbucket");
 
-        browseInstallDir1.setText("Browse");
-        browseInstallDir1.addActionListener(new java.awt.event.ActionListener() {
+        browseBackupHomeDir.setText("Browse");
+        browseBackupHomeDir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseInstallDir1ActionPerformed(evt);
+                browseBackupHomeDirActionPerformed(evt);
             }
         });
 
         jLabel9.setText("Store Backups In:");
 
-        textBackupBackupDir.setText("C:\\Atlassian\\Bitbucket\\5.13.1");
+        textBackupBackupDir.setText("C:\\Atlassian\\Backups");
 
-        browseInstallDir2.setText("Browse");
-        browseInstallDir2.addActionListener(new java.awt.event.ActionListener() {
+        browseBackupBackupDir.setText("Browse");
+        browseBackupBackupDir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseInstallDir2ActionPerformed(evt);
+                browseBackupBackupDirActionPerformed(evt);
             }
         });
 
@@ -209,10 +209,10 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
 
         textBackupClientDir.setText("C:\\Atlassian\\bitbucket-backup-client-3.3.4\\bitbucket-restore-client.jar");
 
-        browseClientDir1.setText("Browse");
-        browseClientDir1.addActionListener(new java.awt.event.ActionListener() {
+        browseBackupClientDir.setText("Browse");
+        browseBackupClientDir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseClientDir1ActionPerformed(evt);
+                browseBackupClientDirActionPerformed(evt);
             }
         });
 
@@ -223,12 +223,12 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
 
         jLabel15.setText("Bitbucket Admin Password:");
 
-        textBackupUrl.setText("localhost:7990");
+        textBackupUrl.setText("http://localhost:7990");
         textBackupUrl.setMinimumSize(new java.awt.Dimension(370, 20));
 
         jLabel16.setText("Bitbucket Base URL:");
 
-        labelProgress1.setText("Progress:");
+        passwordAdminPw.setText("AmazingGrace");
 
         jLabel17.setText("Log:");
 
@@ -250,6 +250,8 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        labelProgress2.setText("Progress:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -269,19 +271,19 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(textBackupHomeDir, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(browseInstallDir1)
+                                .addComponent(browseBackupHomeDir)
                                 .addGap(5, 5, 5))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(textBackupBackupDir)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(browseInstallDir2)
+                                .addComponent(browseBackupBackupDir)
                                 .addGap(6, 6, 6))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(textBackupClientDir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(browseClientDir1)
+                        .addComponent(browseBackupClientDir)
                         .addGap(6, 6, 6))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +291,7 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel17)
                                 .addGap(150, 150, 150)
-                                .addComponent(labelProgress1)
+                                .addComponent(labelProgress2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(progressBarBackup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -323,19 +325,19 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textBackupHomeDir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(browseInstallDir1))
+                    .addComponent(browseBackupHomeDir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textBackupBackupDir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(browseInstallDir2))
+                    .addComponent(browseBackupBackupDir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textBackupClientDir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(browseClientDir1))
+                    .addComponent(browseBackupClientDir))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -349,11 +351,11 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
                     .addComponent(jLabel16)
                     .addComponent(textBackupUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel17)
-                        .addComponent(labelProgress1))
-                    .addComponent(progressBarBackup, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(labelProgress2)
+                        .addComponent(progressBarBackup, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -440,7 +442,7 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
 
         jLabel1.setText("Log:");
 
-        labelProgress.setText("Progress (0%):");
+        labelProgress.setText("Progress:");
 
         textInstallDir.setText("C:\\Atlassian\\Bitbucket\\5.13.1");
 
@@ -562,7 +564,7 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboDbProvider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -690,17 +692,47 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
         else JOptionPane.showMessageDialog(null, "You cannot perform operations while a restore is in progress", "Restore In Progress", JOptionPane.OK_OPTION);
     }//GEN-LAST:event_browseClientDirActionPerformed
 
-    private void browseInstallDir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseInstallDir1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_browseInstallDir1ActionPerformed
+    private void browseBackupHomeDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBackupHomeDirActionPerformed
+        if(!main.busy())
+        {
+            JFileChooser fc = new JFileChooser();
+            int returnVal = fc.showOpenDialog(this);
+            if(returnVal == JFileChooser.APPROVE_OPTION)
+            {
+                File file = fc.getSelectedFile();
+                textBackupHomeDir.setText(file.getPath());
+            }
+        }
+        else JOptionPane.showMessageDialog(null, "You cannot perform operations while a restore is in progress", "Restore In Progress", JOptionPane.OK_OPTION);
+    }//GEN-LAST:event_browseBackupHomeDirActionPerformed
 
-    private void browseInstallDir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseInstallDir2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_browseInstallDir2ActionPerformed
+    private void browseBackupBackupDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBackupBackupDirActionPerformed
+        if(!main.busy())
+        {
+            JFileChooser fc = new JFileChooser();
+            int returnVal = fc.showOpenDialog(this);
+            if(returnVal == JFileChooser.APPROVE_OPTION)
+            {
+                File file = fc.getSelectedFile();
+                textBackupBackupDir.setText(file.getPath());
+            }
+        }
+        else JOptionPane.showMessageDialog(null, "You cannot perform operations while a restore is in progress", "Restore In Progress", JOptionPane.OK_OPTION);
+    }//GEN-LAST:event_browseBackupBackupDirActionPerformed
 
-    private void browseClientDir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseClientDir1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_browseClientDir1ActionPerformed
+    private void browseBackupClientDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBackupClientDirActionPerformed
+        if(!main.busy())
+        {
+            JFileChooser fc = new JFileChooser();
+            int returnVal = fc.showOpenDialog(this);
+            if(returnVal == JFileChooser.APPROVE_OPTION)
+            {
+                File file = fc.getSelectedFile();
+                textBackupClientDir.setText(file.getPath());
+            }
+        }
+        else JOptionPane.showMessageDialog(null, "You cannot perform operations while a restore is in progress", "Restore In Progress", JOptionPane.OK_OPTION);
+    }//GEN-LAST:event_browseBackupClientDirActionPerformed
 
     private void buttonQuit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQuit1ActionPerformed
         if(main.busy()) JOptionPane.showMessageDialog(null, "You cannot perform operations while a backup is in progress", "Backup In Progress", JOptionPane.OK_OPTION);
@@ -709,7 +741,7 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
 
     private void buttonBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackupActionPerformed
         if(main.busy()) JOptionPane.showMessageDialog(null, "You cannot perform operations while a backup is in progress", "Backup In Progress", JOptionPane.OK_OPTION);
-        else System.exit(0);
+        else main.executingBackup = true;
     }//GEN-LAST:event_buttonBackupActionPerformed
 
     /**
@@ -789,6 +821,7 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
     
     public String getBackupBackupDir()
     {
+        main.log(Level.INFO, "backupbackupdir : " + textBackupBackupDir.getText());
         return textBackupBackupDir.getText();
     }
     
@@ -854,13 +887,13 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton browseBackupBackupDir;
+    private javax.swing.JButton browseBackupClientDir;
     private javax.swing.JButton browseBackupDir;
+    private javax.swing.JButton browseBackupHomeDir;
     private javax.swing.JButton browseClientDir;
-    private javax.swing.JButton browseClientDir1;
     private javax.swing.JButton browseHomeDir;
     private javax.swing.JButton browseInstallDir;
-    private javax.swing.JButton browseInstallDir1;
-    private javax.swing.JButton browseInstallDir2;
     private javax.swing.JButton buttonBackup;
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonQuit;
@@ -897,7 +930,7 @@ public class MainGUI extends javax.swing.JFrame implements Runnable {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel labelProgress;
-    private javax.swing.JLabel labelProgress1;
+    private javax.swing.JLabel labelProgress2;
     private javax.swing.JTextArea logArea;
     private javax.swing.JTextArea logAreaBackup;
     private javax.swing.JPasswordField passwordAdminPw;

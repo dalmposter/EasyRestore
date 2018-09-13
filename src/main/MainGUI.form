@@ -93,13 +93,13 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="textBackupHomeDir" pref="422" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="browseInstallDir1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="browseBackupHomeDir" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="textBackupBackupDir" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="browseInstallDir2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="browseBackupBackupDir" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -109,7 +109,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="textBackupClientDir" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="browseClientDir1" min="-2" max="-2" attributes="0"/>
+                              <Component id="browseBackupClientDir" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -118,7 +118,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="labelProgress1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labelProgress2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="progressBarBackup" max="32767" attributes="0"/>
                                   </Group>
@@ -165,13 +165,13 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="textBackupHomeDir" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="browseInstallDir1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="browseBackupHomeDir" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="textBackupBackupDir" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="browseInstallDir2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="browseBackupBackupDir" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
@@ -179,7 +179,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="textBackupClientDir" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="browseClientDir1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="browseBackupClientDir" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
@@ -196,12 +196,12 @@
                           <Component id="textBackupUrl" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="81" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="labelProgress1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel17" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="labelProgress2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="progressBarBackup" alignment="0" min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="progressBarBackup" alignment="0" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="94" max="-2" attributes="0"/>
@@ -223,15 +223,15 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textBackupHomeDir">
               <Properties>
-                <Property name="text" type="java.lang.String" value="C:\u005cAtlassian\u005cBitbucket\u005c5.13.1" containsInvalidXMLChars="true"/>
+                <Property name="text" type="java.lang.String" value="C:\u005cAtlassian\u005cApplicationData\u005cBitbucket" containsInvalidXMLChars="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="browseInstallDir1">
+            <Component class="javax.swing.JButton" name="browseBackupHomeDir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Browse"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseInstallDir1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseBackupHomeDirActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
@@ -241,15 +241,15 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textBackupBackupDir">
               <Properties>
-                <Property name="text" type="java.lang.String" value="C:\u005cAtlassian\u005cBitbucket\u005c5.13.1" containsInvalidXMLChars="true"/>
+                <Property name="text" type="java.lang.String" value="C:\u005cAtlassian\u005cBackups" containsInvalidXMLChars="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="browseInstallDir2">
+            <Component class="javax.swing.JButton" name="browseBackupBackupDir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Browse"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseInstallDir2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseBackupBackupDirActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
@@ -262,12 +262,12 @@
                 <Property name="text" type="java.lang.String" value="C:\u005cAtlassian\u005cbitbucket-backup-client-3.3.4\u005cbitbucket-restore-client.jar" containsInvalidXMLChars="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="browseClientDir1">
+            <Component class="javax.swing.JButton" name="browseBackupClientDir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Browse"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseClientDir1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseBackupClientDirActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
@@ -290,7 +290,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textBackupUrl">
               <Properties>
-                <Property name="text" type="java.lang.String" value="localhost:7990"/>
+                <Property name="text" type="java.lang.String" value="http://localhost:7990"/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[370, 20]"/>
                 </Property>
@@ -302,17 +302,13 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="passwordAdminPw">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="AmazingGrace"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator4">
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator5">
-            </Component>
-            <Component class="javax.swing.JProgressBar" name="progressBarBackup">
-            </Component>
-            <Component class="javax.swing.JLabel" name="labelProgress1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Progress:"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
@@ -349,6 +345,13 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBackupActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelProgress2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Progress:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JProgressBar" name="progressBarBackup">
             </Component>
           </SubComponents>
         </Container>
@@ -487,9 +490,9 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="comboDbProvider" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="comboDbProvider" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -684,7 +687,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="labelProgress">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Progress (0%):"/>
+                <Property name="text" type="java.lang.String" value="Progress:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="textInstallDir">

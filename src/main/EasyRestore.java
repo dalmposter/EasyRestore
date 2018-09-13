@@ -118,9 +118,11 @@ public class EasyRestore implements Runnable{
             else if(executingBackup)
             {
                 gui.addBackupProgress = 0;
-                if(executeBackup()) logBackup(Level.INFO, "Restore Success");
-                else log(Level.SEVERE, "Backup Failure");
-                executing = false;
+                if(executeBackup()) logBackup(Level.INFO, "Backup Success");
+                else logBackup(Level.SEVERE, "Backup Failure");
+                executingBackup = false;
+                
+                sleep(1000);
             }
             else
             {
@@ -131,7 +133,36 @@ public class EasyRestore implements Runnable{
     
     private boolean executeBackup()
     {
-        return false;
+        String variableReturns = getBackupVariables();
+        if(!"".equals(variableReturns) && variableReturns != null)
+        {
+            log(Level.SEVERE, "Invalid " + variableReturns);
+            return false;
+        }
+        try
+        {
+            gui.addBackupProgress = 25;
+            log(Level.INFO, "Running backup client...");
+            Path path = Paths.get(backupClientDir);
+            Runtime runtime = Runtime.getRuntime();
+            gui.addBackupProgress = 45;
+            log(Level.INFO, "Running : " + "java -noverify -Dbitbucket.home=" + backupHomeDir + " -Dbitbucket.user=" + adminName + " -Dbitbucket.password=" + adminPassword + " -Dbitbucket.baseUrl=" + baseUrl + " -Dbackup.home=" + backupBackupDir + " -jar " + backupClientDir);
+            gui.addBackupProgress = 55;
+            runtime.exec("cmd.exe /C start /wait java -noverify -Dbitbucket.home=" + backupHomeDir + " -Dbitbucket.user=" + adminName + " -Dbitbucket.password=" + adminPassword + " -Dbitbucket.baseUrl=" + baseUrl + " -Dbackup.home=" + backupBackupDir + " -jar " + backupClientDir);
+            gui.addBackupProgress = 75;
+            
+            sleep(1000);
+            gui.addBackupProgress = 85;
+        }
+        catch(Exception e)
+        {
+            log(Level.SEVERE, "Failed to run backup client: " + e);
+            e.printStackTrace();
+            gui.addBackupProgress = 100;
+            return false;
+        }
+        gui.addBackupProgress = 100;
+        return true;
     }
     
     EasyRestore()
@@ -188,7 +219,7 @@ public class EasyRestore implements Runnable{
         
         adminPassword = gui.getAdminPw();
         if(adminPassword == null || "".equals(adminPassword)) return "Admin Password";
-        logBackup(Level.INFO, "Found admin password : " + adminPassword);
+        logBackup(Level.INFO, "Found admin password");
         
         baseUrl = gui.getBaseUrl();
         if(baseUrl == null || "".equals(baseUrl)) return "Base URL";
@@ -227,7 +258,7 @@ public class EasyRestore implements Runnable{
         
         dbPassword = gui.getDbPw();
         if(dbPassword == null || "".equals(dbPassword)) return "Bitbucket Database Password";
-        log(Level.INFO, "Found database password : " + dbPassword);
+        log(Level.INFO, "Found database password");
         
         dbProvider = gui.getDatabase();
         if(dbProvider < -1 || dbProvider > 4) return "Database Provider";
@@ -340,7 +371,7 @@ public class EasyRestore implements Runnable{
                     gui.addProgress += 10;
                     
                     log(Level.INFO, "Running restore client");
-                    Process restoreClient = Runtime.getRuntime().exec("cmd.exe /c /wait java -jar -noverify -Dbitbucket.home=" + restoreDir + " " + restoreClientDir + " " + backupDir);
+                    Process restoreClient = Runtime.getRuntime().exec("cmd.exe /c /wait java -noverify -Dbitbucket.home=" + restoreDir + " -jar " + restoreClientDir + " " + backupDir);
 
                     sleep(1000);
                 }
